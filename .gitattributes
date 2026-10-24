@@ -1,0 +1,6 @@
+# Normaliza fins de linha para evitar diffs falsos entre Windows (CRLF) e Linux (LF)
+* text=auto
+*.png binary
+*.mcpb binary
+*.pdf binary
+*.xlsx binary

@@ -1,0 +1,16 @@
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+target/
+server/
+data/lucene/
+data/processed/
+data/documents/
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.pem
+*.key

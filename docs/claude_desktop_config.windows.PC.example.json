@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "biblioteca-digital": {
+      "command": "C:\\Program Files\\Java\\jdk-26.0.2\\bin\\java.exe",
+      "args": [
+        "-jar",
+        "C:\\Users\\PC\\eclipse-workspace\\mcp-server01Trab1\\target\\dist-server\\mcp_server01_server.jar"
+      ],
+      "env": {
+        "APP_DATA_DIR": "C:\\Users\\PC\\eclipse-workspace\\mcp-server01Trab1\\data",
+        "SOLR_ENABLED": "false"
+      }
+    }
+  }
+}

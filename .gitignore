@@ -1,0 +1,24 @@
+# Maven / Java
+target/
+*.class
+*.log
+
+# Segredos, certificados e configuracoes de maquinas locais
+.env
+.env.*
+!.env.example
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.pem
+*.key
+
+# Dados gerados pela execucao (manter somente arquivos de exemplo versionados)
+data/lucene/
+data/processed/
+data/documents/
+data/library-universal.*
+
+# IDEs
+.idea/

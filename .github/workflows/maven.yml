@@ -1,0 +1,25 @@
+name: Maven CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    # Executa a mesma bateria nos dois JDKs que importam para a entrega:
+    # 21 (versao minima do projeto) e 25 (JDK provavel do professor).
+    name: mvn clean verify (JDK ${{ matrix.java }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java: ['21', '25']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java }}
+          cache: maven
+      - name: Run unit and integration tests
+        run: mvn --batch-mode --no-transfer-progress clean verify

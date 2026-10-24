@@ -1,0 +1,55 @@
+{
+  "manifest_version": "0.3",
+  "name": "biblioteca-digital-java",
+  "display_name": "Biblioteca Digital MCP (Java)",
+  "version": "1.0.0",
+  "description": "Conecta o Claude Desktop ao servidor MCP Java do projeto Biblioteca Digital por STDIO.",
+  "long_description": "Extensão local para uso acadêmico. Ela inicia o JAR do servidor MCP já compilado no computador e encaminha STDIO sem modificar as mensagens JSON-RPC. Os caminhos padrão correspondem ao ambiente Windows informado pelo usuário e podem ser revistos nas configurações da extensão.",
+  "author": {
+    "name": "Projeto acadêmico Biblioteca Digital MCP"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "server/launcher.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server/launcher.js"],
+      "env": {
+        "BIBLIOTECA_JAVA_EXECUTABLE": "${user_config.java_executable}",
+        "BIBLIOTECA_SERVER_JAR": "${user_config.server_jar}",
+        "APP_DATA_DIR": "${user_config.app_data_dir}",
+        "SOLR_ENABLED": "false"
+      }
+    }
+  },
+  "user_config": {
+    "java_executable": {
+      "type": "string",
+      "title": "Executável Java (java.exe)",
+      "description": "Caminho absoluto para java.exe do JDK 26 nesta máquina.",
+      "default": "C:\\Program Files\\Java\\jdk-26.0.2\\bin\\java.exe",
+      "required": true
+    },
+    "server_jar": {
+      "type": "string",
+      "title": "JAR do servidor MCP",
+      "description": "Caminho absoluto para target\\dist-server\\mcp_server01_server.jar. A pasta libs deve ficar ao lado do JAR.",
+      "default": "C:\\Users\\PC\\eclipse-workspace\\mcp-server01Trab1\\target\\dist-server\\mcp_server01_server.jar",
+      "required": true
+    },
+    "app_data_dir": {
+      "type": "string",
+      "title": "Pasta data do projeto",
+      "description": "Pasta data da raiz do projeto; contém input\\exemplo.pdf e input\\teste.xlsx.",
+      "default": "C:\\Users\\PC\\eclipse-workspace\\mcp-server01Trab1\\data",
+      "required": true
+    }
+  },
+  "tools_generated": true,
+  "prompts_generated": true,
+  "compatibility": {
+    "claude_desktop": ">=1.0.0",
+    "platforms": ["win32"]
+  },
+  "keywords": ["MCP", "Java", "Biblioteca Digital", "Serviços Web"]
+}

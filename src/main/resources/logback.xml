@@ -1,0 +1,32 @@
+<!-- Inicia a configuracao do sistema de registros da aplicacao. -->
+<configuration>
+
+    <!-- Cria um componente responsavel por enviar os registros para o console. -->
+    <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+
+        <!-- Direciona os registros para stderr, preservando stdout para o protocolo MCP. -->
+        <target>System.err</target>
+
+        <!-- Inicia a configuracao do formato de apresentacao dos registros. -->
+        <encoder>
+
+            <!-- Define data, horario, thread, nivel, classe responsavel e mensagem do registro. -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -- %msg%n</pattern>
+
+        <!-- Finaliza a configuracao do formato dos registros. -->
+        </encoder>
+
+    <!-- Finaliza o componente responsavel por exibir os registros no console. -->
+    </appender>
+
+    <!-- Define INFO como o nivel minimo dos registros gerais da aplicacao. -->
+    <root level="INFO">
+
+        <!-- Envia os registros gerais para stderr, evitando interferencia no protocolo MCP. -->
+        <appender-ref ref="STDERR"/>
+
+    <!-- Finaliza a configuracao principal dos registros. -->
+    </root>
+
+<!-- Finaliza a configuracao do Logback. -->
+</configuration>

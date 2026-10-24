@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: biblioteca-postgres
+    ports:
+      - "127.0.0.1:5432:5432"
+    environment:
+      POSTGRES_DB: library
+      POSTGRES_USER: library
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD em .env}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U library -d library"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  mysql:
+    image: mysql:8.4
+    container_name: biblioteca-mysql
+    ports:
+      - "127.0.0.1:3307:3306"
+    environment:
+      MYSQL_DATABASE: library
+      MYSQL_USER: library
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Defina MYSQL_PASSWORD em .env}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Defina MYSQL_ROOT_PASSWORD em .env}
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u library -p$${MYSQL_PASSWORD} --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+
+  solr:
+    image: solr:10.0.0
+    container_name: biblioteca-solr
+    ports:
+      - "127.0.0.1:8983:8983"
+    command: ["solr-precreate", "gutenberg"]
+    volumes:
+      - solr-data:/var/solr
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8983/solr/admin/info/system >/dev/null"]
+      interval: 15s
+      timeout: 5s
+      retries: 15
+
+volumes:
+  postgres-data:
+  mysql-data:
+  solr-data:
